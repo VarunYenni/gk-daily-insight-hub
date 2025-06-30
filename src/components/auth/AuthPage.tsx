@@ -95,6 +95,19 @@ const AuthPage = () => {
               {loading ? 'Loading...' : (isLogin ? 'Sign In' : 'Sign Up')}
             </Button>
           </form>
+          
+          {isLogin && (
+            <div className="mt-4 text-center">
+              <Button
+                variant="link"
+                onClick={() => navigate('/forgot-password')}
+                className="text-sm text-muted-foreground"
+              >
+                Forgot your password?
+              </Button>
+            </div>
+          )}
+          
           <div className="mt-4 text-center">
             <Button
               variant="link"
