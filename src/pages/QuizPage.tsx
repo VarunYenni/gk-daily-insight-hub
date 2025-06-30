@@ -13,6 +13,21 @@ interface QuizQuestion {
   correct_answer: number;
 }
 
+// Type guard to validate quiz questions
+const isValidQuizQuestion = (obj: any): obj is QuizQuestion => {
+  return (
+    obj &&
+    typeof obj.question === 'string' &&
+    Array.isArray(obj.options) &&
+    obj.options.every((option: any) => typeof option === 'string') &&
+    typeof obj.correct_answer === 'number'
+  );
+};
+
+const isValidQuizQuestions = (data: any): data is QuizQuestion[] => {
+  return Array.isArray(data) && data.every(isValidQuizQuestion);
+};
+
 const QuizPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [showResults, setShowResults] = useState<{ [key: number]: boolean }>({});
@@ -62,7 +77,7 @@ const QuizPage = () => {
     );
   }
 
-  if (!quiz || !quiz.questions) {
+  if (!quiz || !quiz.questions || !isValidQuizQuestions(quiz.questions)) {
     return (
       <div className="p-4 pb-20">
         <div className="mb-6">
@@ -76,7 +91,7 @@ const QuizPage = () => {
     );
   }
 
-  const questions = quiz.questions as QuizQuestion[];
+  const questions = quiz.questions;
 
   return (
     <div className="p-4 pb-20">
