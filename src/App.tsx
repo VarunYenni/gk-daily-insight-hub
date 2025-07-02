@@ -18,6 +18,8 @@ import QuizPage from "./pages/QuizPage";
 import DigestsPage from "./pages/DigestsPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +70,18 @@ const App = () => (
                       </ProtectedRoute>
                     } 
                   />
+                  <Route
+                    path="/forgot-password"
+                    element={
+                      <ForgotPasswordPage />
+                    }
+                  />
+                    <Route
+                        path="/reset-password"
+                        element={
+                         <ResetPasswordPage />
+                        }
+                    />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>

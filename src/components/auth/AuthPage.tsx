@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthProvider';
 import { useNavigate } from 'react-router-dom';
@@ -59,54 +58,67 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-center">
-            {isLogin ? 'Welcome to Daily GK' : 'Join Daily GK'}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-center">
+              {isLogin ? 'Welcome to Daily GK' : 'Join Daily GK'}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {!isLogin && (
+                  <Input
+                      type="text"
+                      placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required
+                  />
+              )}
               <Input
-                type="text"
-                placeholder="Full Name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                required
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
               />
+              <Input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+              />
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? 'Loading...' : (isLogin ? 'Sign In' : 'Sign Up')}
+              </Button>
+            </form>
+
+            {isLogin && (
+                <div className="mt-4 text-center">
+                  <Button
+                      variant="link"
+                      onClick={() => navigate('/forgot-password')}
+                      className="text-sm text-muted-foreground"
+                  >
+                    Forgot your password?
+                  </Button>
+                </div>
             )}
-            <Input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <Input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Loading...' : (isLogin ? 'Sign In' : 'Sign Up')}
-            </Button>
-          </form>
-          <div className="mt-4 text-center">
-            <Button
-              variant="link"
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-sm"
-            >
-              {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
+
+            <div className="mt-4 text-center">
+              <Button
+                  variant="link"
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="text-sm"
+              >
+                {isLogin ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
   );
 };
 
