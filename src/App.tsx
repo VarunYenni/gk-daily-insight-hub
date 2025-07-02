@@ -12,14 +12,14 @@ import ProtectedRoute from "@/components/layout/ProtectedRoute";
 
 import HomePage from "./pages/HomePage";
 import AuthPage from "@/components/auth/AuthPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import SummaryPage from "./pages/SummaryPage";
 import BookmarksPage from "./pages/BookmarksPage";
 import QuizPage from "./pages/QuizPage";
 import DigestsPage from "./pages/DigestsPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFound from "./pages/NotFound";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +37,8 @@ const App = () => (
                 <Routes>
                   <Route path="/" element={<HomePage />} />
                   <Route path="/auth" element={<AuthPage />} />
+                  <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                  <Route path="/reset-password" element={<ResetPasswordPage />} />
                   <Route path="/summary/:id" element={<SummaryPage />} />
                   <Route 
                     path="/bookmarks" 
