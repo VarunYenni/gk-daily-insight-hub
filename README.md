@@ -1,6 +1,6 @@
 # GK Daily Insight Hub 🧠🇮🇳
 
-> A smart, AI-powered current affairs app tailored for UPSC and other Indian government exam aspirants. Built using Supabase, OpenAI, and Next.js.
+> A smart, AI-powered current affairs app tailored for UPSC and other Indian government exam aspirants. Built using Supabase, HuggingFace, and React.js.
 
 ---
 
@@ -18,10 +18,10 @@
 
 ## 🧠 Tech Stack
 
-- **Frontend**: Next.js, Tailwind CSS, Lovable.dev
-- **Backend**: FastAPI (Python) hosted on Railway
+- **Frontend**: React.js, TypeScript, Hugging Face
+- **Backend**: Node.js hosted on Railway
 - **Auth & DB**: Supabase
-- **AI Engine**: OpenAI GPT-4o
+- **AI Engine**: Hugging Face LLM
 - **Storage**: Supabase Storage (PDF Digests)
 
 ---
