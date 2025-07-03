@@ -4,6 +4,8 @@
 
 ---
 <img width="1470" alt="Screenshot 2025-07-04 at 1 20 57 AM" src="https://github.com/user-attachments/assets/6a3d2879-7d42-4dd8-b7c4-dfaff0895344" />
+<img width="1470" alt="Screenshot 2025-07-04 at 1 22 48 AM" src="https://github.com/user-attachments/assets/0c0d2846-b6df-438b-b324-9d0d8e9de9a8" />
+
 
 ## ✨ Features
 
