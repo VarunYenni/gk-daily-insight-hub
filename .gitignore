@@ -13,9 +13,6 @@ dist-ssr
 *.local
 .env.local
 
-.supabase/
-supabase/config.toml
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
