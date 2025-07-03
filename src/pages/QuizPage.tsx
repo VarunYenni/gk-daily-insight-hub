@@ -14,17 +14,17 @@ interface QuizQuestion {
 }
 
 // Type guard to validate quiz questions
-const isValidQuizQuestion = (obj: any): obj is QuizQuestion => {
+const isValidQuizQuestion = (obj: {question: string, options: Array<string>, correct_answer: number}): obj is QuizQuestion => {
   return (
     obj &&
     typeof obj.question === 'string' &&
     Array.isArray(obj.options) &&
-    obj.options.every((option: any) => typeof option === 'string') &&
+    obj.options.every((option: string) => typeof option === 'string') &&
     typeof obj.correct_answer === 'number'
   );
 };
 
-const isValidQuizQuestions = (data: any): data is QuizQuestion[] => {
+const isValidQuizQuestions = (data): data is QuizQuestion[] => {
   return Array.isArray(data) && data.every(isValidQuizQuestion);
 };
 
@@ -32,15 +32,17 @@ const QuizPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [showResults, setShowResults] = useState<{ [key: number]: boolean }>({});
 
-  const today = new Date().toISOString().split('T')[0];
+  const YESTERDAY = new Date(Date.now() - 24 * 60 * 60 * 1000)
+      .toISOString()
+      .slice(0, 10);
 
   const { data: quiz, isLoading, error } = useQuery({
-    queryKey: ['quiz', today],
+    queryKey: ['quiz', YESTERDAY],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('quizzes')
         .select('*')
-        .eq('date', today)
+        .eq('date', YESTERDAY)
         .maybeSingle();
       
       if (error) throw error;
@@ -133,7 +135,9 @@ const QuizPage = () => {
                         <span className="font-medium">
                           {String.fromCharCode(65 + optionIndex)}.
                         </span>
-                        <span className="flex-1">{option}</span>
+                        <span className="flex-1 min-w-0 break-words whitespace-normal">
+                          {option}
+                        </span>
                         {showResult && isCorrect && <CheckCircle size={20} className="text-green-600" />}
                         {showResult && isSelected && !isCorrect && <XCircle size={20} className="text-red-600" />}
                       </div>

@@ -62,7 +62,8 @@ const BookmarksPage = () => {
       {bookmarks && bookmarks.length > 0 ? (
         <div className="space-y-4">
           {bookmarks.map((bookmark) => {
-            const summary = bookmark.summaries;
+            const summaryArr = bookmark.summaries;
+            const summary = Array.isArray(summaryArr) ? summaryArr[0] : summaryArr;
             if (!summary) return null;
             
             return (
