@@ -50,7 +50,7 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ id, title, body, date, tags }
           </div>
         )}
         <Link to={`/summary/${id}`}>
-          <Button variant="outline" size="sm" className="w-full">
+          <Button variant="outline" size="sm" className="w-40 mt-4">
             Read more
           </Button>
         </Link>
