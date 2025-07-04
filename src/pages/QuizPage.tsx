@@ -32,7 +32,7 @@ const QuizPage = () => {
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [showResults, setShowResults] = useState<{ [key: number]: boolean }>({});
 
-  const YESTERDAY = new Date(Date.now() - 24 * 60 * 60 * 1000)
+  const YESTERDAY = new Date(Date.now() - (24 * 60 * 60 * 1000) + (5.5 * 60 * 60 * 1000)) // Adjust for UTC+5:30
       .toISOString()
       .slice(0, 10);
 
@@ -109,7 +109,10 @@ const QuizPage = () => {
         <h2 className="text-2xl font-bold mb-2">Daily Quiz</h2>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
           <p className="text-muted-foreground text-base sm:text-sm leading-snug">
-            Test your knowledge with today&apos;s questions
+            {`Test your knowledge with ${new Date(YESTERDAY).toLocaleDateString('en-IN', {
+              day: '2-digit',
+              month: 'long',
+            })} questions`}
           </p>
           <div className="text-sm text-muted-foreground font-medium px-3 py-1 bg-muted rounded-md shadow-sm">
             Score: <span className="text-foreground">{score}</span>/<span>{questions.length}</span>
