@@ -8,8 +8,10 @@ import { Button } from '@/components/ui/button';
 import { Menubar, MenubarMenu, MenubarTrigger } from '@/components/ui/menubar';
 
 /* ─── helper: YYYY-MM-DD for n days ago ─── */
-const isoDaysAgo = (n: number) =>
-    new Date(Date.now() - n * 86_400_000).toISOString().slice(0, 10);
+const isoDaysAgo = (n: number) => {
+    const utcOffset = 5.5 * 60 * 60 * 1000;
+    return new Date(Date.now() - n * 86_400_000 + utcOffset).toISOString().slice(0, 10);
+}
 
 const LAST_7_DATES = [...Array(7)].map((_, i) => isoDaysAgo(i + 1));
 
@@ -34,7 +36,7 @@ const HomePage: React.FC = () => {
       if (error) throw error;
       return data;
     },
-    staleTime: 1000 * 60, // 1 min cache
+    staleTime: 100000 * 60, // 100 minutes
   });
 
   /* ─── unauthenticated landing ─── */
