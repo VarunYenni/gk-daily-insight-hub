@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -95,11 +95,25 @@ const QuizPage = () => {
 
   const questions = quiz.questions;
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const score = useMemo(
+      () =>
+          Object.entries(selectedAnswers).filter(
+              ([idx, opt]) => questions[Number(idx)].correct_answer === opt
+          ).length,
+      [selectedAnswers, questions]
+  );
+
   return (
     <div className="p-4 pb-20">
       <div className="mb-6">
         <h2 className="text-2xl font-bold mb-2">Daily Quiz</h2>
-        <p className="text-muted-foreground">Test your knowledge with today's questions</p>
+        <div className="flex justify-between">
+          <p className="text-muted-foreground">Test your knowledge with today's questions</p>
+          <p>
+            Score:&nbsp;<span>{score}</span>/<span>{questions.length}</span>
+          </p>
+        </div>
       </div>
 
       <div className="space-y-6">
