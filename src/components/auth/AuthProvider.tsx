@@ -11,7 +11,6 @@ interface AuthContextType {
   signOut: () => Promise<void>;
   requestPasswordReset: (email: string) => Promise<{ error: any }>;
   updatePassword: (newPassword: string) => Promise<{ error: any }>;
-    doesUserExist: (email: string) => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -97,15 +96,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   /* ────────────────────────────────────────────*/
 
-  const doesUserExist = async (email: string) => {
-    const {error} = await supabase.auth.signInWithPassword({
-      email,
-      password: '___dummy___password___',
-    });
-
-    return error?.message?.toLowerCase().includes('invalid login credentials');
-  };
-
   const value: AuthContextType = {
     user,
     session,
@@ -115,7 +105,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     signOut,
     requestPasswordReset,
     updatePassword,
-    doesUserExist,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

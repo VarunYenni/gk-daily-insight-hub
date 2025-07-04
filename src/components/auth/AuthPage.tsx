@@ -32,16 +32,6 @@ const AuthPage = () => {
       if (isLogin) {
         result = await signIn(email, password);
       } else {
-        const exists = await doesUserExist(email);
-        if (exists) {
-          toast({
-            title: 'Account already exists',
-            description: 'Please sign in instead of signing up with that e-mail.',
-            variant: 'destructive',
-          });
-          setLoading(false);
-          return;
-        }
         result = await signUp(email, password, fullName);
       }
 
