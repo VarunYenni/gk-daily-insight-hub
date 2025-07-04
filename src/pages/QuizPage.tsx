@@ -50,6 +50,16 @@ const QuizPage = () => {
     }
   });
 
+  const questions = quiz?.questions;
+
+  const score = useMemo(
+      () =>
+          Object.entries(selectedAnswers).filter(
+              ([idx, opt]) => questions[Number(idx)].correct_answer === opt
+          ).length,
+      [questions, selectedAnswers]
+  );
+
   const handleAnswerSelect = (questionIndex: number, optionIndex: number) => {
     setSelectedAnswers(prev => ({
       ...prev,
@@ -93,26 +103,17 @@ const QuizPage = () => {
     );
   }
 
-  const questions = quiz.questions;
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const score = useMemo(
-      () =>
-          Object.entries(selectedAnswers).filter(
-              ([idx, opt]) => questions[Number(idx)].correct_answer === opt
-          ).length,
-      [selectedAnswers, questions]
-  );
-
   return (
     <div className="p-4 pb-20">
-      <div className="mb-6">
+      <div className="mb-6 pt-3.5 pb-1.5 sticky top-16 z-20 bg-background">
         <h2 className="text-2xl font-bold mb-2">Daily Quiz</h2>
-        <div className="flex justify-between">
-          <p className="text-muted-foreground">Test your knowledge with today's questions</p>
-          <p>
-            Score:&nbsp;<span>{score}</span>/<span>{questions.length}</span>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-2">
+          <p className="text-muted-foreground text-base sm:text-sm leading-snug">
+            Test your knowledge with today&apos;s questions
           </p>
+          <div className="text-sm text-muted-foreground font-medium px-3 py-1 bg-muted rounded-md shadow-sm">
+            Score: <span className="text-foreground">{score}</span>/<span>{questions.length}</span>
+          </div>
         </div>
       </div>
 

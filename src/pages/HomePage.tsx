@@ -84,7 +84,7 @@ const HomePage: React.FC = () => {
           {/* ─── menubar with last 7 days ─── */}
         </header>
         <div className="sticky top-20 z-20 bg-background">
-          <Menubar className="mt-3 flex overflow-x-auto whitespace-nowrap">
+          <Menubar className="mt-3 flex overflow-x-auto whitespace-nowrap overflow-y-hidden">
             <MenubarMenu>
               {LAST_7_DATES.map((d) => (
                   <MenubarTrigger

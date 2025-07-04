@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 
 const AuthPage = () => {
-  const { signIn, signUp, user } = useAuth();
+  const { signIn, signUp, user, doesUserExist } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLogin, setIsLogin] = useState(true);
@@ -32,6 +32,16 @@ const AuthPage = () => {
       if (isLogin) {
         result = await signIn(email, password);
       } else {
+        const exists = await doesUserExist(email);
+        if (exists) {
+          toast({
+            title: 'Account already exists',
+            description: 'Please sign in instead of signing up with that e-mail.',
+            variant: 'destructive',
+          });
+          setLoading(false);
+          return;
+        }
         result = await signUp(email, password, fullName);
       }
 
@@ -44,7 +54,7 @@ const AuthPage = () => {
       } else if (!isLogin) {
         toast({
           title: 'Success',
-          description: 'Please check your email to verify your account'
+          description: 'Account created successfully! Enjoy Daily GK!',
         });
       }
     } catch (error) {
