@@ -63,7 +63,7 @@ const ProfilePage = () => {
             <Button
               variant="destructive"
               onClick={signOut}
-              className="w-full flex items-center gap-2"
+              className="flex items-center gap-2"
             >
               <LogOut size={20} />
               Sign Out

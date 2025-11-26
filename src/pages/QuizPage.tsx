@@ -14,14 +14,16 @@ interface QuizQuestion {
 }
 
 // Type guard to validate quiz questions
-const isValidQuizQuestion = (obj: {question: string, options: Array<string>, correct_answer: number}): obj is QuizQuestion => {
-  return (
-    obj &&
-    typeof obj.question === 'string' &&
-    Array.isArray(obj.options) &&
-    obj.options.every((option: string) => typeof option === 'string') &&
-    typeof obj.correct_answer === 'number'
+const isValidQuizQuestion = (obj : QuizQuestion): boolean => {
+  const result = (
+      obj &&
+      typeof obj.question === 'string' &&
+      Array.isArray(obj.options) &&
+      obj.options.every((option: string) => typeof option === 'string') &&
+      typeof obj.correct_answer === 'number'
   );
+  if (!result) console.log(obj);
+  return result;
 };
 
 const isValidQuizQuestions = (data): data is QuizQuestion[] => {
