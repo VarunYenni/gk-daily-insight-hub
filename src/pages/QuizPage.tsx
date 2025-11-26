@@ -143,7 +143,7 @@ const QuizPage = () => {
                       key={optionIndex}
                       variant="outline"
                       className={cn(
-                        "text-left justify-start h-auto p-3",
+                        "w-full text-left justify-start h-auto p-3",
                         showResult && isCorrect && "bg-green-100 border-green-500 text-green-800",
                         showResult && isSelected && !isCorrect && "bg-red-100 border-red-500 text-red-800",
                         !showResult && isSelected && "bg-primary/10 border-primary"
